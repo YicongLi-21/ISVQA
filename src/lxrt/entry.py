@@ -20,8 +20,8 @@ import os
 import torch
 import torch.nn as nn
 
-from lxrt.tokenization import BertTokenizer
-from lxrt.modeling import LXRTFeatureExtraction as VisualBertForLXRFeature, VISUAL_CONFIG
+from .tokenization import BertTokenizer
+from .modeling import LXRTFeatureExtraction as VisualBertForLXRFeature, VISUAL_CONFIG
 
 
 class InputFeatures(object):
@@ -99,8 +99,8 @@ class LXRTEncoder(nn.Module):
             print("initializing all the weights")
             self.model.apply(self.model.init_bert_weights)
 
-    def multi_gpu(self):
-        self.model = nn.DataParallel(self.model)
+    def multi_gpu(self, args):
+        self.model = nn.DataParallel(self.model, device_ids=args.device_id)  # TODO
 
     @property
     def dim(self):

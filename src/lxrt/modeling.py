@@ -21,12 +21,12 @@ import json
 import logging
 import math
 import os
-# os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 import shutil
 import tarfile
 import tempfile
 import sys
 from io import open
+from numpy import dtype
 
 import torch
 from torch import nn
@@ -326,7 +326,7 @@ class BertAttention(nn.Module):
         query_layer = self.transpose_for_scores(mixed_query_layer)
         key_layer = self.transpose_for_scores(mixed_key_layer)
         value_layer = self.transpose_for_scores(mixed_value_layer)
-
+        # print(query_layer.shape, key_layer.shape, value_layer.shape)
         # Take the dot product between "query" and "key" to get the raw attention scores.
         attention_scores = torch.matmul(query_layer, key_layer.transpose(-1, -2))
         attention_scores = attention_scores / math.sqrt(self.attention_head_size)
@@ -862,7 +862,8 @@ class LXRTModel(BertPreTrainedModel):
         # positions we want to attend and -10000.0 for masked positions.
         # Since we are adding it to the raw scores before the softmax, this is
         # effectively the same as removing these entirely.
-        extended_attention_mask = extended_attention_mask.to(dtype=next(self.parameters()).dtype) # fp16 compatibility
+        #extended_attention_mask = extended_attention_mask.to(dtype=next(self.parameters()).dtype) # fp16 compatibility
+        extended_attention_mask = extended_attention_mask.to(dtype=torch.float32)
         extended_attention_mask = (1.0 - extended_attention_mask) * -10000.0
 
         # Process the visual attention mask

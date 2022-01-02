@@ -4,8 +4,8 @@
 import torch.nn as nn
 
 from src.param import args
-from lxrt.entry import LXRTEncoder
-from lxrt.modeling import BertLayerNorm, GeLU
+from src.lxrt.entry import LXRTEncoder
+from src.lxrt.modeling import BertLayerNorm, GeLU
 
 # Max length including <bos> and <eos>
 MAX_VQA_LENGTH = 20
