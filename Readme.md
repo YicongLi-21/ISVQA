@@ -1,9 +1,9 @@
 # ISVQA
 
-introduction....
+[ToDo] introduction.... 
 
-# Dataset intro
-blabla
+## Dataset intro
+[ToDo] blabla
 ```sh
 |-- extracted_features
 |   |-- train
@@ -26,7 +26,7 @@ blabla
 |       |-- CAM_BACK
 ```
 
-# File structure
+## File structure
 ```sh
 -- input
   -- image
@@ -48,8 +48,29 @@ blabla
 ```
 
 
-# Preparation 
-- mask rcnn benchmark [instruction](https://mmf.sh/docs/tutorials/image_feature_extraction/) 
+## Preparation
+### Prerequisite
+- MMF install [Official instruction](https://mmf.sh/docs/), download the mmf repo under '/src'.
+```
+cd src
+git clone https://github.com/facebookresearch/mmf.git
+cd mmf
+pip install --editable .  # after this one, it will become pytorch 1.9 automatically
+```
+- Mask-RCNN backbone [instruction](https://mmf.sh/docs/tutorials/image_feature_extraction/), download the repo under '/src'.
+```
+pip install ninja yacs cython matplotlib
+pip install opencv-python
+cd src
+git clone https://gitlab.com/vedanuj/vqa-maskrcnn-benchmark.git
+cd vqa-maskrcnn-benchmark
+python setup.py build develop
+```
+- You might have such a following bug, change PY3 to PY37:
+File "/root/Documents/ISVQA/src/vqa-maskrcnn-benchmark/maskrcnn_benchmark/utils/imports.py", line 4, in <module>
+    if torch._six.PY3:
+AttributeError: module 'torch._six' has no attribute 'PY3'
+```
 - LXMERT repository [instruction](https://github.com/airsplay/lxmert/blob/master/requirements.txt) 
 - download pretrained lxmert model via
 ```sh
@@ -63,24 +84,25 @@ wget https://nlp.cs.unc.edu/data/model_LXRT.pth -P snap/pretrained
 
 pip install yaml
 
-# Feature extraction
+## Feature extraction
+[ToDo: How do we create necessary annotations?]
 run 
 ```sh
 python feature_extaction.py
 ```
 
-# ID and score generation
+## ID and score generation
 
 
-# Training
+## Training
 ```sh
 python ISVQA_main.py
 ```
 
-# Test
+## Test
 ```sh
 python vqa.py
 ```
 
-# Training and result
+## Training and result
 
