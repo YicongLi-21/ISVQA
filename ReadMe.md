@@ -53,6 +53,7 @@ This repository is to implement lxmert model based VQA in autonomous driving dat
 
 ## Preparation
 ### Prerequisite
+conda install -c anaconda boto3  # TODO
 - MMF install [Official instruction](https://mmf.sh/docs/), download the mmf repo under '/src'.
 ```
 cd src
