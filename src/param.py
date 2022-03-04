@@ -34,16 +34,16 @@ def parse_args():
     parser = argparse.ArgumentParser()
 
     # Data Splits
-    parser.add_argument("--train", default='./input/imdb_nuscenes_split_train_score_id.json')
+    parser.add_argument("--train", default='./input/ProcessedFile/imdb_nuscenes_spilt_train_score_id.json')
     # parser.add_argument("--train", default='')
-    parser.add_argument("--valid", default='./input/imdb_nuscenes_split_test_score_id.json')
+    parser.add_argument("--valid", default='./input/ProcessedFile/imdb_nuscenes_spilt_test_score_id.json')
     # parser.add_argument("--test", default='val')
     # parser.add_argument("--valid", default="")
     parser.add_argument("--test")
 
     # Training Hyper-parameters
     parser.add_argument("--feature_path", default='./input/ISVQA/NuScenes/extracted_features/train')
-    parser.add_argument('--batchSize', dest='batch_size', type=int, default=12)
+    parser.add_argument('--batchSize', dest='batch_size', type=int, default=18)
     parser.add_argument('--optim', default='bert')
     parser.add_argument('--lr', type=float, default=5e-6)
     parser.add_argument('--epochs', type=int, default=30)
@@ -51,7 +51,7 @@ def parse_args():
     parser.add_argument('--seed', type=int, default=9595, help='random seed')
 
     # Debugging
-    parser.add_argument('--output', type=str, default='snap/test_test_1217')
+    parser.add_argument('--output', type=str, default='output/result')
     parser.add_argument("--fast", action='store_const', default=False, const=True)
     parser.add_argument("--tiny", action='store_const', default=False, const=True)
     parser.add_argument("--tqdm", action='store_const', default=True, const=True)
@@ -61,7 +61,7 @@ def parse_args():
                         help='Load the model (usually the fine-tuned model).')
     parser.add_argument('--loadLXMERT', dest='load_lxmert', type=str, default=None,
                         help='Load the pre-trained LXMERT model.')
-    parser.add_argument('--loadLXMERTQA', dest='load_lxmert_qa', type=str, default='./input/model_LXRT.pth',
+    parser.add_argument('--loadLXMERTQA', dest='load_lxmert_qa', type=str, default='./input/pretrained/model_LXRT.pth',
                         help='Load the pre-trained LXMERT model with QA answer head.')
     parser.add_argument("--fromScratch", dest='from_scratch', action='store_const', default=False, const=True,
                         help='If none of the --load, --loadLXMERT, --loadLXMERTQA is set, '
@@ -91,7 +91,7 @@ def parse_args():
     # Training configuration
     parser.add_argument("--multiGPU", action='store_const', default=True, const=True)
     parser.add_argument("--numWorkers", dest='num_workers', default=0)
-    parser.add_argument("--device_id", default=[0, 1])
+    parser.add_argument("--device_id", default=[0, 1, 2, 3, 4, 5])
 
     # Parse the arguments.
     args = parser.parse_args()

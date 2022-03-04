@@ -17,11 +17,11 @@ from src.vqa_data_preprocessing import VQADataset, FeatureLoader, VQATorchDatase
 
 DataTuple = collections.namedtuple("DataTuple", 'dataset loader evaluator')
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "2, 3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1, 2, 3, 4, 5, 6"
 # device = torch.device('cuda:1')
 
-def get_data_tuple(splits: str, feature_loader: FeatureLoader, bs: int, shuffle=False, drop_last=False) -> DataTuple:
-    dset = VQADataset(splits)
+def get_data_tuple(jsonfile: str, feature_loader: FeatureLoader, bs: int, shuffle=False, drop_last=False) -> DataTuple:
+    dset = VQADataset(jsonfile)
     # features = FeatureLoader(feature_path)
     tset = VQATorchDataset(dset, feature_loader.img_data)
     evaluator = VQAEvaluator(dset)
@@ -82,7 +82,7 @@ class VQA:
             batch_per_epoch = len(self.train_tuple.loader)
             t_total = int(batch_per_epoch * args.epochs)
             print("BertAdam Total Iters: %d" % t_total)
-            from lxrt.optimization import BertAdam
+            from src.lxrt.optimization import BertAdam
             self.optim = BertAdam(list(self.model.parameters()),
                                   lr=args.lr,
                                   warmup=0.1,

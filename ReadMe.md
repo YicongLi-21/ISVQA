@@ -32,22 +32,21 @@ This repository is to implement lxmert model based VQA in autonomous driving dat
     -- NuScenes
       -- extracted_features
     -- jsons
-  # -- pretrain-weights
+    -- pretrained
+      --pretrained weights
   -- ProcessedFile
 -- output
--- others(temporary)
+-- others
 -- src
 |   -- DataPreproScript
 |   -- lxrt
 |   -- pretrain
 |   -- param.py
-|   -- vqa_data.py
+|   -- vqa_data_preprocessing.py
 |   -- vqa_model.py
--- AddLabel.py
--- ReadMe.md
 -- feature_extaction.py
--- data_preprocessing.py
 -- ISVQA_main.py
+-- ReadMe.md
 ```
 
 
@@ -80,35 +79,36 @@ AttributeError: module 'torch._six' has no attribute 'PY3'
 ```sh
 wget https://nlp.cs.unc.edu/data/model_LXRT.pth -P snap/pretrained
 ```
+- download *all_ans.json* for pretained lxmert model(https://github.com/airsplay/lxmert/blob/master/data/lxmert/all_ans.json)
 
 - maskrcnn_benchmark
 - mmf (orinially is ..., mmf is too large ...)
 - cv
 - python version, pytorch version
 
-# Feature extraction
-```sh
-python feature_extraction.py
-```
 
 # Question ID and score generation
 For original question id is not unique for each question, we need to generate new question id to identify each question.
 Besides, we also need to generate answer score for each answer.
 
-You can either directly use preprocessed annotation file(*trainval_with_score_quesid.json* for training and *test_with_score_quesid.json* for testing) and *ans2label.txt* under *input/ProcesseFile* or do it on your own following below steps.
-1. Download the original annotation files and answer file from [ISVQA](https://github.com/ankanbansal/ISVQA-Dataset/tree/master/nuscenes)
-2. Generate new annotation file and answer file via *data_preprocessing.py*. Before running *data_preprocessing.py*, don't forget to change file path to yours.
-3. Run *AddLabel.py* to generate new *ans2label.txt* 
+You need to preprocess the original annotation files on your own following below steps.
+1. Download the original annotation files from [ISVQA](https://github.com/ankanbansal/ISVQA-Dataset/tree/master/nuscenes)
+2. Generate new annotation file and answer file via *add_id_and_score.py* under *input/others*. Before running *add_id_and_score.py*, don't forget to change file path to yours.
 
+# Feature extraction
+```sh
+python feature_extraction.py
+```
 
 # Training and Test
-When features, new .json file and .txt file are ready, run *ISVQA_main.py* to train and test the whole model.
+You need to split the original trainpart features into training and test part features, so you can generate two new annotation files as indicators, including train part and test part, via *spiltjson.py* under *input/others*. 
+When two new .json file are ready, run *ISVQA_main.py* to train and test the whole model.
 ```sh
 python ISVQA_main.py
 ```
 
 # Result
-After 100 Epochs, we have the accuracy on training set as xxx and on test set as xxx.
+After 30 Epochs, we have the accuracy on training set as xxx and on test set as xxx.
 
 *figure1*
 

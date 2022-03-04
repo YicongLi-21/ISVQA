@@ -72,7 +72,7 @@ class VQADataset:
         # assert len(self.ans2label) == len(self.label2ans)
         self.ans2label = {}
         self.label2ans = {}
-        with open('./input/answers_nuscenes_more_than_1.txt') as file:
+        with open('./input/ISVQA/Annotation/answers_nuscenes_more_than_1.txt') as file:
             lines = file.read().splitlines()
             for idx, line in enumerate(lines):
                 self.ans2label[line] = idx

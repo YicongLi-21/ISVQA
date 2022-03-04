@@ -3,6 +3,8 @@ output/
 .venv*
 src/mmf
 src/vqa-maskrcnn-benchmark
+detectron_model_x152.pth
+detectron_model_x152.yaml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

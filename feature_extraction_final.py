@@ -23,7 +23,7 @@ from maskrcnn_benchmark.utils.model_serialization import load_state_dict
 from mmf.utils.download import download
 from PIL import Image
 
-torch.cuda.set_device('cuda:0')
+torch.cuda.set_device('cuda:1')
 
 
 class FeatureExtractor:
@@ -96,10 +96,10 @@ class FeatureExtractor:
             help="Number of features to extract.",
         )
         parser.add_argument(
-            "--output_folder", type=str, default="./input/ISVQA/NuScenes/feature_output_1217", help="Output folder"
+            "--output_folder", type=str, default="./input/ISVQA/NuScenes/feature_output", help="Output folder"
         )
         parser.add_argument("--image_dir", type=str, default="./input/ISVQA/NuScenes", help="Image directory or file")
-        parser.add_argument("--annotations_file", default="./input/imdb_nuscenes_split_train_score_id.json", type=str)
+        parser.add_argument("--annotations_file", default="./input/ProcessedFile/imdb_nuscenes_trainval_add_score_id.json", type=str)
         parser.add_argument(
             "--feature_name",
             type=str,

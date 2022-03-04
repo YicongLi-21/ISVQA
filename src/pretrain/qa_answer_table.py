@@ -25,7 +25,7 @@ class AnswerTable:
     }
 
     def __init__(self, dsets=None):
-        self.all_ans = json.load(open("data/lxmert/all_ans.json"))
+        self.all_ans = json.load(open("./input/pretrained/all_ans.json"))
         if dsets is not None:
             dsets = set(dsets)
             # If the answer is used in the dsets
@@ -95,7 +95,8 @@ def load_lxmert_qa(path, model, label2ans):
     :return:
     """
     print("Load QA pre-trained LXMERT from %s " % path)
-    loaded_state_dict = torch.load("%s_LXRT.pth" % path)
+    loaded_state_dict = torch.load("%s" % path)
+    #loaded_state_dict = torch.load("%s_LXRT.pth" % path)
     model_state_dict = model.state_dict()
 
     # Handle Multi-GPU pre-training --> Single GPU fine-tuning

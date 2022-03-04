@@ -3,8 +3,8 @@ import numpy as np
 from collections import Counter
 
 
-path = './imdb_nuscenes_trainval.json'
-new_path = 'imdb_nuscenes_trainval_add_score_id.json'
+path = './input/ISVQA/Annotation/imdb_nuscenes_trainval.json'
+new_path = './input/ProcessedFile/imdb_nuscenes_trainval_add_score_id.json'
 
 data = json.load(open(path))['data']
 for i, datum in enumerate(data):
